@@ -1,22 +1,48 @@
-import { app, BrowserWindow, ipcMain, Tray, Menu, shell } from 'electron'
+import { app, BrowserWindow, ipcMain, Tray, Menu, shell, systemPreferences } from 'electron'
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer'
 import { enableLiveReload } from 'electron-compile'
 const path = require('path')
 
-// module to auto-reload
-const electronReload = require('electron-reload')
-
 let mainWindow
 let tray
+
+let icons = {
+  defaultIcon: null,
+  defaultIconPath: null,
+  iconArray: null,
+  iconTimer: null
+}
+
+// Hide the dock icon right away
 app.dock.hide()
+
 const isDevMode = process.execPath.match(/[\\/]electron/)
 
-enableLiveReload({strategy: 'react-hmr'})
+if (isDevMode) {
+  // enableLiveReload({strategy: 'react-hmr'})
+  enableLiveReload()
+}
 
-console.log('isDevMode', isDevMode)
+function getWhichIcon () {
+  return systemPreferences.isDarkMode() ? 'icon' : 'icon-transparent'
+}
+
+const setDefaultIcon = () => {
+  icons.defaultIcon = getWhichIcon()
+  icons.iconArray = [getWhichIcon(), 'icon-blue', 'icon-green', 'icon-orange', 'icon-purple', 'icon-yellow', 'icon-red']
+  icons.defaultIconPath = path.join(__dirname, `/assets/icon-color-cycle/${icons.defaultIcon}.png`)
+  if (tray) {
+    tray.setImage(icons.defaultIconPath)
+  }
+}
 
 const createWindow = async () => {
-  tray = new Tray(path.join(__dirname, '/assets/icon.png'))
+  setDefaultIcon()
+  tray = new Tray(icons.defaultIconPath)
+
+  systemPreferences.subscribeNotification('AppleInterfaceThemeChangedNotification', () => {
+    setDefaultIcon()
+  })
 
   tray.on('click', function (event) {
     toggleWindow()
@@ -49,7 +75,8 @@ const createWindow = async () => {
     frame: false,
     resizable: false,
     transparent: true,
-    alwaysOnTop: true
+    alwaysOnTop: true,
+    icon: path.join(__dirname, 'assets/system-icons/png/64x64.png')
   })
 
   mainWindow.loadURL(`file://${__dirname}/index.html`)
@@ -83,20 +110,17 @@ const createWindow = async () => {
   })
 }
 
-let iconTimer
-let iconArray = ['icon', 'icon-blue', 'icon-green', 'icon-orange', 'icon-purple', 'icon-yellow', 'icon-red']
-
 const cycleIcons = () => {
   tray.setHighlightMode('never')
-  iconTimer = setInterval(() => {
-    let icon = iconArray[Math.floor(Math.random() * iconArray.length)]
+  icons.iconTimer = setInterval(() => {
+    let icon = icons.iconArray[Math.floor(Math.random() * icons.iconArray.length)]
     tray.setImage(path.join(__dirname, `/assets/icon-color-cycle/${icon}.png`))
   }, 100)
 }
 
 const uncycleIcons = () => {
-  clearInterval(iconTimer)
-  tray.setImage(path.join(__dirname, `/assets/icon-color-cycle/icon.png`))
+  clearInterval(icons.iconTimer)
+  tray.setImage(path.join(__dirname, `/assets/icon-color-cycle/${icons.defaultIcon}.png`))
 }
 
 const toggleWindow = () => {
@@ -141,11 +165,4 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
   }
-})
-
-/**
- * listen to specific folders to watch
- */
-electronReload(__dirname, {
-  electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
 })

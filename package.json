@@ -28,20 +28,22 @@
                 ]
             },
             "electronPackagerConfig": {
-                "packageManager": "npm"
+                "packageManager": "npm",
+                "icon": "src/assets/system-icons/icon.icns",
+                "name": "What the Port"
             },
             "electronWinstallerConfig": {
-                "name": "what_the_port_test"
+                "name": "What the Port"
             },
             "electronInstallerDebian": {},
             "electronInstallerRedhat": {},
             "github_repository": {
-                "owner": "",
-                "name": ""
+                "owner": "matthewgonzalez",
+                "name": "what-the-port"
             },
             "windowsStoreConfig": {
                 "packageName": "",
-                "name": "whattheporttest"
+                "name": "whattheport"
             }
         }
     },
@@ -49,9 +51,11 @@
         "classnames": "^2.2.5",
         "electron-compile": "^6.4.1",
         "electron-devtools-installer": "^2.2.0",
+        "kewler": "^1.0.8",
         "listening-processes": "^1.2.0",
         "lodash": "^4.17.4",
         "menubar": "^5.2.3",
+        "pleasejs": "^0.4.2",
         "react": "^15.6.1",
         "react-dom": "^15.6.1",
         "react-hot-loader": "^3.0.0-beta.7",
@@ -60,6 +64,7 @@
     "devDependencies": {
         "babel-plugin-transform-async-to-generator": "^6.24.1",
         "babel-plugin-transform-es2015-classes": "^6.24.1",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "babel-preset-env": "^1.6.0",
         "babel-preset-react": "^6.24.1",
         "electron-prebuilt-compile": "1.7.5",

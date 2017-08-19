@@ -5,8 +5,8 @@
 body {
   user-select: none;
   /*background-color: rgba(32, 34, 36, 0.98);*/
-  background-image: url('./assets/img-noise-361x370.99.png') ;
-  font-family: 'Alegreya Sans SC', sans-serif;
+  font-family: 'Lucida Grande', sans-serif;
+  font-size: 12px;
   cursor: default;
 }
 
@@ -20,28 +20,57 @@ body {
   text-align: left;
   display: block;
   position: fixed;
+  // background-color: rgba(238, 238, 238, 0.97);
+  background: transparent url('./assets/img-noise-361x370.97.light.png') repeat left top;
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
   overflow-y: scroll;
-  padding: 0px 0px 30px;
+  padding: 15px 0px 30px;
+  &.dark-theme {
+    background: transparent url('./assets/img-noise-361x370.97.png') repeat left top;
+  }
 }
 
-.logo {
-  padding: 10px;
-  color: white;
+.floating-info {
+position:fixed;
+bottom:0px;
+right: 0px;
+opacity: 0.25;
+z-index: 1;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.floating-info-section {
+  float: left;
   text-align: center;
-  position:fixed;
-  bottom:0px;
-  right: 0px;
+  font-family: 'Alegreya Sans SC', sans-serif;
+  cursor: pointer;
+  color: white;
+  margin-left:1px;
+  padding: 10px 15px;
+  display: inline-block;
   background: rgba(0,0,0, .5);
-  opacity: 0.15;
-  z-index: 1;
+}
+.power-off {
+  .floating-info:hover &:hover {
+    background-color: red;
+  }
+}
+.hide-app {
+  .floating-info:hover &:hover {
+    background-color: #aaa;
+  }
+}
+.logo {
+  border-top-left-radius: 5px;
+  padding: 10px;
 }
 
-.logo:hover {
-  opacity: 1;
+.floating-info:hover .logo:hover {
   background-color: teal;
 }
 
@@ -67,7 +96,10 @@ body {
 }
 
 .App-list {
-  color: white;
+  color: black;
+  .dark-theme & {
+    color: white;
+  }
 }
 
 .App hr {
@@ -81,19 +113,25 @@ body {
 }
 
 a {
-  color: #777;
+  color: #555;
   text-decoration: none;
+  .dark-theme & {
+    color: #999;
+  }
 }
 a:hover {
-  color: #ccc;
+  color: #777;
   text-decoration: underline;
+  .dark-theme & {
+    color: #ccc;
+  }
 }
 
 .process-command {
   font-size: 24px;
   width: 100%;
-  padding: 10px 20px;
-  background-color: rgba(14, 17, 17, 0.5);
+  font-family: 'Alegreya Sans SC', sans-serif;
+  padding: 0px 20px 0px;
 }
 
 .process-deets-wrapper.processing {
@@ -104,24 +142,28 @@ a:hover {
 .process-deets-wrapper {
   position: relative;
   border-left: 5px solid teal;
-  margin: 15px 20px;
-  padding: 5px 0px 5px 15px;
+  margin: 5px 20px 20px;
+  padding: 0px 0px 0px 10px;
   /*background-color: rgba(20,20,20,.5);*/
   /*box-shadow: 0px 1px 4px rgba(255,255,255,.05), inset 1px 1px 4px rgba(0,0,0,.25);*/
 }
 
 .process-deets {
-  margin: 2px 0px;
+  margin: 0px;
 }
 .process-deets .label {
   display: inline-block;
-  padding: 5px;
-  color: #555;
+  padding: 0px 0px 5px;
+  color: #000;
+  font-weight: bold;
+  .dark-theme & {
+    color: #fff;
+  }
 }
 .process-deets .deet {
   border-radius: 3px 3px 3px 3px;
   display: inline-block;
-  padding: 5px;
+  padding: 0px 5px 5px;
   /*white-space: nowrap;*/
   word-wrap: break-word;
   user-select: all;
@@ -130,23 +172,28 @@ a:hover {
 
 .process-deets.inline {
   display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 2px;
 }
 
 .process-deets .deet .local-host {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .process-deets .deet .port-number {
-  color: white;
-  font-size: 18px;
   text-decoration: none;
+  color: #000;
+  .dark-theme & {
+    color: white;
+  }
 }
 
 .process-deets .deet.kill {
   text-decoration: none;
   margin: 0px 5px 0px 0px;
   color: red;
-  padding: 0px 5px 0px 4px;
+  padding: 0px 5px;
+  line-height: 1.5em;
   user-select: none;
   cursor: pointer;
   display: inline-block;
@@ -172,6 +219,7 @@ a:hover {
 .process-deets-wrapper .are-you-sure-dialog div {
   margin: auto;
   text-align: center;
+  color: white;
 }
 
 .process-deets-wrapper .are-you-sure-dialog .dialog-button {
@@ -190,10 +238,15 @@ a:hover {
 }
 
 .process-deets .deet.process-invoking-command {
-  background-color: rgba(255,255,255,0.05);
   white-space: nowrap;
+  background-color: rgba(0,0,0,0.05);
   overflow-x: scroll;
   display: block;
   clear: both;
   margin-bottom: 10px;
+  padding: 5px;
+  font-size: .8em;
+  .dark-theme & {
+    background-color: rgba(255,255,255,0.05);
+  }
 }

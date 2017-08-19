@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import ReactList from 'react-list'
 import processes from 'listening-processes'
+import classNames from 'classnames'
 import CommandsList from './components/CommandsList'
-
+const { systemPreferences, shell, app } = require('electron').remote
 class App extends Component {
   constructor (props) {
     super(props)
@@ -12,13 +13,26 @@ class App extends Component {
     this.state = {
       'commands': processArray,
       'app': {
-        version: process.env.npm_package_version || window.require('electron').remote.app.getVersion()
+        version: process.env.npm_package_version || app.getVersion(),
+        isDarkMode: systemPreferences.isDarkMode()
       }
     }
   }
 
   componentWillMount () {
     this.processesUpdate()
+
+    // Subscribe to macOS theme change listener
+    systemPreferences.subscribeNotification('AppleInterfaceThemeChangedNotification', () => {
+      let newState = {
+        ...this.state,
+        app: {
+          ...this.state.app,
+          isDarkMode: systemPreferences.isDarkMode()
+        }
+      }
+      this.setState(newState)
+    })
   }
 
   getProcesses () {
@@ -45,17 +59,34 @@ class App extends Component {
     this.setState({
       'commands': processArray
     }, () => {
-      window.setTimeout(this.processesUpdate.bind(this), 10000)
+      window.setTimeout(this.processesUpdate.bind(this), 2000)
     })
   }
+
+  hideApp () {
+    app.hide()
+  }
+
+  quitApp () {
+    app.quit()
+  }
+
   renderCommand (index, key) {
-    return <CommandsList command={this.state.commands[index]} key={this.state.commands[index].command} divider={(this.state.commands.length - 1) === index ? false : true} />
+    return <CommandsList command={this.state.commands[index]} key={this.state.commands[index].command} isDarkMode={this.state.app.isDarkMode} />
   }
 
   render () {
+    let appClass = classNames(
+      'App',
+      {'dark-theme': this.state.app.isDarkMode}
+    )
     return (
-      <div className="App">
-        <div className="logo">wtp? <span className="version">beta {this.state.app.version}</span></div>
+      <div className={appClass}>
+        <div className="floating-info">
+          <div className="floating-info-section logo" onClick={() => shell.openExternal('http://github.com/matthewgonzalez/what-the-port')}>wtp? <span className="version">beta {this.state.app.version}</span></div>
+          <div className="floating-info-section hide-app" onClick={this.hideApp.bind(this)}>–</div>
+          <div className="floating-info-section power-off" onClick={this.quitApp.bind(this)}>X</div>
+        </div>
         <div className="header">
           <span className="search-bar">filter</span>
         </div>

@@ -1,41 +1,39 @@
 import React, { Component } from 'react'
 import ReactList from 'react-list'
 import ProcessesList from './ProcessesList'
+import Please from 'pleasejs'
+import {color, lightness} from 'kewler'
 
 class CommandsList extends Component {
   constructor (props) {
     super(props)
-    this.borderColor = this.randomHex()
+    let accentColor = Please.make_color({saturation: '.9', value: '1', format: 'hex'})
+    this.state = {
+      accentColor,
+      accentColorDark: color(`${accentColor}`, lightness(-18))
+    }
   }
 
   renderProcesses (index, key) {
     return <ProcessesList
-      borderColor={this.borderColor}
+      accentColor={ this.props.isDarkMode ? this.state.accentColor : this.state.accentColorDark }
       process={this.props.command.processes[index]}
       key={this.props.command.processes[index].port}
     />
   }
 
-  randomHex () {
-    return '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
-  }
-
-  renderDivider () {
-    if (this.props.divider) {
-      return <hr />
-    }
-  }
-
   render () {
     return (
       <div>
-        <div className="process-command" style={{color: this.borderColor}}>{this.props.command.command}</div>
+        <div className="process-command"
+          style={{
+            color: this.props.isDarkMode ? this.state.accentColor : this.state.accentColorDark
+          }}>{this.props.command.command}</div>
         <ReactList
           itemRenderer={this.renderProcesses.bind(this)}
           length={this.props.command.processes.length}
           type='simple'
         />
-        {this.renderDivider()}
       </div>
     )
   }

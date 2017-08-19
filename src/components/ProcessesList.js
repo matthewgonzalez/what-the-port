@@ -19,8 +19,8 @@ class ProcessesList extends Component {
     const { pid } = this.props.process
     this.setState({ processing: true, showDialog: false }, () => {
       let results = processes.kill(pid)
-      if (results.success.includes(pid)) {
-        console.log('success!')
+      if (results.fail.includes(pid)) {
+        this.setState({ processing: true, showDialog: false })
       }
     })
   }
@@ -30,7 +30,7 @@ class ProcessesList extends Component {
       return (
         <div className="are-you-sure-dialog">
           <div>
-            Woah there. Are you sure you want to kill the process at PID {this.props.process.pid}?
+            Woah there. Really? Kill the process at PID {this.props.process.pid}?
             <br/>
             <span className="dialog-button confirm-kill" onClick={this.killPort.bind(this)}>It's time has come</span>
             <span className="dialog-button cancel-kill" onClick={this.toggleDialog.bind(this)}>Hah, j/k!</span>
@@ -47,7 +47,7 @@ class ProcessesList extends Component {
     )
 
     return (
-      <div className={wrapperClass} style={{borderColor: this.props.borderColor}}>
+      <div className={wrapperClass} style={{borderColor: this.props.accentColor}}>
         {this.renderAreYouSureDialog()}
         <div className="process-deets inline">
           <span className="label">URL: </span>
@@ -58,8 +58,9 @@ class ProcessesList extends Component {
             </a>
           </span>
         </div>
-        <div className="process-deets inline"><span className="label">PID: </span><span className="deet">{this.props.process.pid}</span></div>
         <div className="process-deets inline">
+          <span className="label">PID: </span>
+          <span className="deet">{this.props.process.pid}</span>
           <a className="deet kill" onClick={this.toggleDialog.bind(this)} title="Kill Process">x</a>
         </div>
         <div className="process-deets">
