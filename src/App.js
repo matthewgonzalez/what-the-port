@@ -4,6 +4,7 @@ import ReactList from 'react-list'
 import processes from 'listening-processes'
 import classNames from 'classnames'
 import CommandsList from './components/CommandsList'
+import { ipcRenderer } from 'electron'
 const { systemPreferences, shell, app } = require('electron').remote
 class App extends Component {
   constructor (props) {
@@ -22,8 +23,8 @@ class App extends Component {
   componentWillMount () {
     this.processesUpdate()
 
-    // Subscribe to macOS theme change listener
-    systemPreferences.subscribeNotification('AppleInterfaceThemeChangedNotification', () => {
+    // Subscribe to macOS theme change listener sent from ipcMain
+    ipcRenderer.on('theme-changed', () => {
       let newState = {
         ...this.state,
         app: {

@@ -42,6 +42,7 @@ const createWindow = async () => {
 
   systemPreferences.subscribeNotification('AppleInterfaceThemeChangedNotification', () => {
     setDefaultIcon()
+    mainWindow.webContents.send('theme-changed')
   })
 
   tray.on('click', function (event) {

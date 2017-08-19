@@ -65,9 +65,7 @@ class ProcessesList extends Component {
         </div>
         <div className="process-deets">
           <span className="label">Invoking Command: </span>
-          <span className="deet process-invoking-command">
-            {this.props.process.invokingCommand}
-          </span>
+          <div className="deet process-invoking-command">{this.props.process.invokingCommand}</div>
         </div>
       </div>
     )

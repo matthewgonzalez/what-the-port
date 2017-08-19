@@ -27,7 +27,7 @@ body {
   bottom: 0px;
   left: 0px;
   overflow-y: scroll;
-  padding: 15px 0px 30px;
+  padding: 15px 0px 20px;
   &.dark-theme {
     background: transparent url('./assets/img-noise-361x370.97.png') repeat left top;
   }
@@ -37,8 +37,11 @@ body {
 position:fixed;
 bottom:0px;
 right: 0px;
-opacity: 0.25;
+opacity: 0.15;
 z-index: 1;
+  .dark-theme & {
+    opacity: 0.5;
+  }
   &:hover {
     opacity: 1;
   }
@@ -51,9 +54,9 @@ z-index: 1;
   cursor: pointer;
   color: white;
   margin-left:1px;
-  padding: 10px 15px;
+  padding: 5px 15px;
   display: inline-block;
-  background: rgba(0,0,0, .5);
+  background: rgba(0,0,0, .85);
 }
 .power-off {
   .floating-info:hover &:hover {
@@ -67,7 +70,7 @@ z-index: 1;
 }
 .logo {
   border-top-left-radius: 5px;
-  padding: 10px;
+  padding: 5px 10px;
 }
 
 .floating-info:hover .logo:hover {
@@ -238,15 +241,18 @@ a:hover {
 }
 
 .process-deets .deet.process-invoking-command {
-  white-space: nowrap;
   background-color: rgba(0,0,0,0.05);
-  overflow-x: scroll;
+  border: 0px;
+  width: 100%;
   display: block;
   clear: both;
   margin-bottom: 10px;
   padding: 5px;
   font-size: .8em;
+  user-select: all;
+  font-family: "Courier New", Courier, monospace;
   .dark-theme & {
+    color: #fff;
     background-color: rgba(255,255,255,0.05);
   }
 }
