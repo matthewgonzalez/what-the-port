@@ -1,0 +1,92 @@
+body {
+  background-color: rgb(255, 196, 62);
+  font-family: 'Lucida Grande', sans-serif;
+  font-size: 12px;
+  letter-spacing: .1em;
+}
+
+.header h1 {
+  font-weight: normal;
+  display: inline-block;
+}
+
+.header {
+  position: relative;
+  clear: both;
+  margin: 25px auto 0px;
+  text-align: center;
+}
+
+.header .logo {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.content {
+  width: 600px;
+  text-align: center;
+  margin: 0px auto;
+}
+
+.video-wrapper {
+  position: absolute;
+  margin: 30px auto 0px;
+  text-align: center;
+  position: relative;
+  margin-bottom: -100px;
+  z-index:9999;
+}
+
+video {
+  border-radius: 5px;
+  width: 500px;
+}
+
+.description {
+  display: block;
+  clear: both;
+  font-size: 12px;
+  width: 280px;
+  margin: 0px auto;
+}
+
+.download-button {
+  z-index:9999;
+  position: relative;
+  background-color:rgb(255, 196, 62);
+  border: 3px solid #000;
+  padding: 10px 25px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.download-button:hover {
+  background-color: #000;
+  color: rgb(255, 196, 62);
+}
+
+.download-description {
+  position: relative;
+  font-size: 8px;
+  z-index: 9999;
+  margin-top: 5px;
+}
+
+.footer {
+  z-index: 9999;
+  margin-top: 50px;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+a {
+  color: #000;
+  border-style: dotted;
+  border-width: 0px 0px 1px;
+  border-color: #000;
+  text-decoration: none;
+}
+
+a:hover {
+  border-style: solid;
+}

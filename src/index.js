@@ -70,7 +70,7 @@ const createWindow = async () => {
   tray.setToolTip('What the port?')
 
   mainWindow = new BrowserWindow({
-    width: 400,
+    width: 350,
     height: 400,
     show: false,
     frame: false,

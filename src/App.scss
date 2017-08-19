@@ -215,19 +215,20 @@ a:hover {
   background: red;
   opacity: 1;
   display: flex;
-  padding: 10px 30px;
+  padding: 10px 20px;
 }
 
 
 .process-deets-wrapper .are-you-sure-dialog div {
   margin: auto;
   text-align: center;
+  font-size: 11px;
   color: white;
 }
 
 .process-deets-wrapper .are-you-sure-dialog .dialog-button {
     padding: 5px 10px;
-    margin: 5px;
+    margin: 10px 0px 5px;
     display: inline-block;
     cursor: pointer;
 }
