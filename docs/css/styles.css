@@ -47,7 +47,7 @@ video {
   clear: both;
   font-size: 12px;
   width: 280px;
-  margin: 0px auto;
+  margin: 0px auto; line-height: 1.5em;
 }
 
 .download-button {
