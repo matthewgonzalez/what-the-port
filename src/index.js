@@ -56,7 +56,7 @@ const createWindow = async () => {
   const contextMenu = Menu.buildFromTemplate([
     { label: 'What the Port?',
       click: () => {
-        shell.openExternal('http://github.com/matthewgonzalez/what-the-port')
+        shell.openExternal('https://matthewgonzalez.github.io/what-the-port/')
       }
     },
     {type: 'separator'},

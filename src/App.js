@@ -84,7 +84,7 @@ class App extends Component {
     return (
       <div className={appClass}>
         <div className="floating-info">
-          <div className="floating-info-section logo" onClick={() => shell.openExternal('http://github.com/matthewgonzalez/what-the-port')}>wtp? <span className="version">beta {this.state.app.version}</span></div>
+          <div className="floating-info-section logo" onClick={() => shell.openExternal('https://matthewgonzalez.github.io/what-the-port/')}>wtp? <span className="version">beta {this.state.app.version}</span></div>
           <div className="floating-info-section hide-app" onClick={this.hideApp.bind(this)}>–</div>
           <div className="floating-info-section power-off" onClick={this.quitApp.bind(this)}>X</div>
         </div>

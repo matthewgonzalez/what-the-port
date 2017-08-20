@@ -12,7 +12,9 @@ body {
 
 .header {
   position: relative;
+  user-select: none;
   clear: both;
+  cursor:default;
   margin: 25px auto 0px;
   text-align: center;
 }
@@ -39,7 +41,8 @@ body {
 
 video {
   border-radius: 5px;
-  width: 500px;
+  /*width: 500px;*/
+  height: 522.72px;
 }
 
 .description {
@@ -89,4 +92,20 @@ a {
 
 a:hover {
   border-style: solid;
+}
+
+.github-info {
+  position:fixed;
+  right: 30px;
+  top: 10px;
+  width: 80px;
+  line-height:1.5em;
+}
+.github-info img {
+  position:absolute;
+  left: -40px;
+  top:3px;
+}
+
+.github-info span {
 }
