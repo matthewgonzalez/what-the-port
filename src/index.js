@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain, Tray, Menu, shell, systemPreferences } fro
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer'
 import { enableLiveReload } from 'electron-compile'
 const path = require('path')
+const checkUpdates = require('./checkupdates')
 
 let mainWindow
 let tray
@@ -58,6 +59,9 @@ const createWindow = async () => {
       click: () => {
         shell.openExternal('https://matthewgonzalez.github.io/what-the-port/')
       }
+    },
+    { label: 'Check for update',
+      click: () => checkUpdates({forceCheck: true})
     },
     {type: 'separator'},
     {label: 'Quit', click: () => app.quit()}
@@ -123,6 +127,14 @@ const createWindow = async () => {
   mainWindow.webContents.on('new-window', function (e, url) {
     e.preventDefault()
     shell.openExternal(url)
+  })
+
+  // Call auto-updater
+  mainWindow.webContents.on('did-frame-finish-load', () => {
+    checkUpdates()
+    if (!isDevMode) {
+      checkUpdates()
+    }
   })
 }
 

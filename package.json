@@ -1,6 +1,6 @@
 {
     "name": "what-the-port",
-    "productName": "what-the-port",
+    "productName": "What the Port?",
     "version": "0.0.1",
     "description": "See which processes are listening on which ports.",
     "main": "src/index.js",
@@ -20,7 +20,6 @@
                     "squirrel"
                 ],
                 "darwin": [
-                    "zip",
                     "dmg"
                 ],
                 "linux": [
@@ -55,6 +54,8 @@
         "classnames": "^2.2.5",
         "electron-compile": "^6.4.1",
         "electron-devtools-installer": "^2.2.0",
+        "electron-json-storage": "^3.0.7",
+        "github-version-checker": "^1.0.1",
         "kewler": "^1.0.8",
         "listening-processes": "^1.2.0",
         "lodash": "^4.17.4",

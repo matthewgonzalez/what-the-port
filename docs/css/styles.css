@@ -24,6 +24,10 @@ body {
   vertical-align: top;
 }
 
+img {
+  user-select: none;
+}
+
 .content {
   width: 600px;
   text-align: center;
