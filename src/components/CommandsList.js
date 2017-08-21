@@ -15,10 +15,11 @@ class CommandsList extends Component {
   }
 
   renderProcesses (index, key) {
+    const { processes } = this.props.command
     return <ProcessesList
       accentColor={ this.props.isDarkMode ? this.state.accentColor : this.state.accentColorDark }
-      process={this.props.command.processes[index]}
-      key={this.props.command.processes[index].port}
+      process={processes[index]}
+      key={`${processes[index].pid}/${processes[index].port}`}
     />
   }
 

@@ -36,6 +36,8 @@ body {
   text-align: center;
   position: relative;
   margin-bottom: -100px;
+  overflow: hidden;
+  height: 513.72px;
   z-index:9999;
 }
 

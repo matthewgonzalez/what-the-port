@@ -67,6 +67,21 @@ const createWindow = async () => {
     tray.popUpContextMenu(contextMenu)
   })
 
+  // Enable Ctrl+C
+  let appMenuTemplate = [{
+    label: 'Edit',
+    submenu: [
+      {
+        label: 'Copy',
+        accelerator: 'Command+C',
+        selector: 'copy:'
+      }
+    ]
+  }]
+
+  let appMenu = Menu.buildFromTemplate(appMenuTemplate)
+  Menu.setApplicationMenu(appMenu)
+
   tray.setToolTip('What the port?')
 
   mainWindow = new BrowserWindow({

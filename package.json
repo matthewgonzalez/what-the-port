@@ -20,7 +20,8 @@
                     "squirrel"
                 ],
                 "darwin": [
-                    "zip"
+                    "zip",
+                    "dmg"
                 ],
                 "linux": [
                     "deb",
@@ -30,7 +31,10 @@
             "electronPackagerConfig": {
                 "packageManager": "npm",
                 "icon": "src/assets/system-icons/icon.icns",
-                "name": "What the Port"
+                "name": "What the Port",
+                "ignore": [
+                    "docs"
+                ]
             },
             "electronWinstallerConfig": {
                 "name": "What the Port"
@@ -54,7 +58,6 @@
         "kewler": "^1.0.8",
         "listening-processes": "^1.2.0",
         "lodash": "^4.17.4",
-        "menubar": "^5.2.3",
         "pleasejs": "^0.4.2",
         "react": "^15.6.1",
         "react-dom": "^15.6.1",
