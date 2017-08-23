@@ -131,7 +131,7 @@ const createWindow = async () => {
 
   // Call auto-updater
   mainWindow.webContents.on('did-frame-finish-load', () => {
-    checkUpdates()
+    // checkUpdates()
     if (!isDevMode) {
       checkUpdates()
     }

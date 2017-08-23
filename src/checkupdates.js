@@ -1,22 +1,17 @@
 'use strict'
 const {app, dialog, shell} = require('electron')
+const path = require('path')
 const version = app.getVersion()
 const versionCheck = require('github-version-checker')
-const storage = require('electron-json-storage');
+const storage = require('electron-json-storage')
 
 function showUpdateMessageBox (update) {
   let message = 'Check it. ' + update.tag_name + ' is hot off the press. You are currently rocking v' + version + '. You might want to go an grab it.'
-  // if (update.body) {
-  //   const splitNotes = update.body.split(/[^\r]\n/)
-  //   message += '\n\nWhat\'s new:\n'
-  //   splitNotes.forEach(notes => {
-  //     message += notes + '\n\n'
-  //   })
-  // }
+
   // Ask user to update the app
   dialog.showMessageBox({
     type: 'question',
-    icon: 'src/assets/system-icons/png/64x64.png',
+    icon: path.join(__dirname, 'assets/system-icons/png/64x64.png'),
     buttons: [
       'Let\'s do this now.', 'Remind me.', 'No, thanks. I don\'t want this update.'
     ],
@@ -39,9 +34,9 @@ function showNoUpdateMessageBox () {
   let message = 'You can go about your business. \nMove along. \nMove along.'
   dialog.showMessageBox({
     type: 'info',
-    icon: 'src/assets/system-icons/png/64x64.png',
+    icon: path.join(__dirname, 'assets/system-icons/png/64x64.png'),
     buttons: [
-      'Oh, well. Thanks. Heh.'
+      'Oh. Well. Thanks. Heh.'
     ],
     defaultId: 0,
     message: 'You\'re all up to date.',
@@ -62,8 +57,8 @@ function startVersionCheck (options) {
 function checkUpdates () {
   const options = Object.assign({
     versionCheck: {
-      repo: 'atom/atom',
-      // repo: 'matthewgonzalez/what-the-port',
+      // repo: 'atom/atom', // for test purposes
+      repo: 'matthewgonzalez/what-the-port',
       currentVersion: version
     },
     forceCheck: false

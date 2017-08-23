@@ -1,7 +1,7 @@
 {
     "name": "what-the-port",
     "productName": "What the Port?",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "See which processes are listening on which ports.",
     "main": "src/index.js",
     "scripts": {
@@ -38,6 +38,10 @@
             "electronWinstallerConfig": {
                 "name": "What the Port"
             },
+            "electronInstallerDMG": {
+              "background": "src/assets/build/dmg-background-combined.tiff",
+              "icon": "src/assets/system-icons/icon.icns"
+            },
             "electronInstallerDebian": {},
             "electronInstallerRedhat": {},
             "github_repository": {
@@ -55,7 +59,7 @@
         "electron-compile": "^6.4.1",
         "electron-devtools-installer": "^2.2.0",
         "electron-json-storage": "^3.0.7",
-        "github-version-checker": "^1.0.1",
+        "github-version-checker": "github:matthewgonzalez/github-version-checker",
         "kewler": "^1.0.8",
         "listening-processes": "^1.2.0",
         "lodash": "^4.17.4",
